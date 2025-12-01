@@ -144,12 +144,17 @@
                         </div>
 
                     </form>
+
+                    <div class=" make-your-password  mb-4">
+                        @await Component.InvokeAsync(typeof(TopicBlockViewComponent), new { systemName = "LoginRegistrationInfo" })
+                    </div>
                 </div>
             </div>
 
             <div class="external-authentication">
                 @await Component.InvokeAsync(typeof(ExternalMethodsViewComponent), "ExternalAuthentication")
             </div>
+            
             @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LoginBottom, additionalData = Model })
         </div>
     </div>
