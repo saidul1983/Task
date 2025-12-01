@@ -1,0 +1,102 @@
+﻿@model HeaderLinksModel
+@using Nop.Core.Domain.Customers
+@inject Nop.Core.IWebHelper webHelper
+
+<div class="user-content user-content-web">
+    <ul>
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderLinksBefore })
+        @if (Model.IsAuthenticated)
+        {
+            <li class="dropdown">
+                <a class="" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"> <strong class="icon-user"></strong> </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <a class="dropdown-item" href="@Url.RouteUrl("CustomerInfo")">
+                        @T("Account.MyAccount")
+                    </a>
+                    <a class="dropdown-item" href="@Url.RouteUrl("Logout")"> @T("Account.Logout")</a>
+                </div>
+            </li>
+        }
+        else
+        {
+            var returnUrl = Context.Request.Query.TryGetValue("returnUrl", out var url) && !StringValues.IsNullOrEmpty(url)
+            ? url.ToString()
+            : webHelper.GetRawUrl(Context.Request);
+
+            <li class="dropdown">
+                <a class="" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false"> <strong class="icon-user"></strong> </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    
+                    @if (Model.RegistrationType != UserRegistrationType.Disabled)
+                    {
+                        <a class="dropdown-item" href="@Url.RouteUrl("Register", new { returnUrl })"> @T("Account.Register") </a>
+                    }
+                    <a class="dropdown-item" href="@Url.RouteUrl("Login", new { returnUrl })">@T("Account.Login")</a>
+                </div>
+            </li>
+        }
+        @if (Model.AllowPrivateMessages)
+        {
+            <li class="nav-item">
+                <a href="@Url.RouteUrl("PrivateMessages", new { tab = "" })" class="ico-inbox">
+                    <span class="inbox-label">@T("PrivateMessages.Inbox")</span>
+                    <span class="inbox-unread">@Model.UnreadPrivateMessages</span>
+                </a>
+            </li>
+        }
+        
+        @if (Model.WishlistEnabled)
+        {
+            <li> <a href="@Url.RouteUrl("Wishlist")">
+                <strong class="icon-love"></strong>
+                </a>
+            </li>
+        }
+
+        @if (Model.ShoppingCartEnabled)
+        {
+            <li>
+                <a href="@Url.RouteUrl("ShoppingCart")">
+                    <strong class="icon-cart"></strong>
+                    <span class="cart-quantity"> @T("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems) </span>
+                </a>
+            </li>
+
+        }
+
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderLinksAfter })
+    </ul>
+    @if (Model.AllowPrivateMessages && !string.IsNullOrEmpty(Model.AlertMessage))
+    {
+        //new private message notification
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                displayPopupNotification('@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(Model.AlertMessage))', 'success', false);
+            });
+        </script>
+    }
+    @if (Model.ShoppingCartEnabled)
+    {
+        <script asp-location="Footer">
+            $(document).ready(function () {
+                $('.header-upper').on('mouseenter', '#topcartlink', function () {
+                    $('#flyout-cart').addClass('active');
+                });
+                $('.header-upper').on('mouseleave', '#topcartlink', function () {
+                    $('#flyout-cart').removeClass('active');
+                });
+                $('.header-upper').on('mouseenter', '#flyout-cart', function () {
+                    $('#flyout-cart').addClass('active');
+                });
+                $('.header-upper').on('mouseleave', '#flyout-cart', function () {
+                    $('#flyout-cart').removeClass('active');
+                });
+            });
+        </script>
+    }
+</div>
+
+
+

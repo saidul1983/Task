@@ -63,6 +63,32 @@
     <Content Update="**\*.config;**\*.json" CopyToOutputDirectory="Never" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Themes\Rosea\Views\ReturnRequest\" />
+    <Folder Include="Themes\Rosea\Views\Product\" />
+    <Folder Include="Themes\Rosea\Views\Order\" />
+    <Folder Include="Themes\Rosea\Views\News\" />
+    <Folder Include="Themes\Rosea\Views\Home\" />
+    <Folder Include="Themes\Rosea\Views\Common\" />
+    <Folder Include="Themes\Rosea\Views\Checkout\" />
+    <Folder Include="Themes\Rosea\Views\Catalog\" />
+    <Folder Include="Themes\Rosea\Views\Boards\" />
+    <Folder Include="Themes\Rosea\Views\Blog\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\RelatedProducts\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\RecentlyViewedProductsBlock\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\ProductsAlsoPurchased\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\PopularProductTags\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\OrderSummary\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\ManufacturerNavigation\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageProducts\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\HomepagePolls\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageNews\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageCategories\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageBestSellers\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\CategoryNavigation\" />
+    <Folder Include="Themes\Rosea\Views\Shared\Components\CheckoutProgress\" />
+  </ItemGroup>
+
   <!-- This target execute after "Build" target.
     We use it to clean up folder with plugins from unnecessary and obsolete libraries. -->
   <Target Name="NopTarget" AfterTargets="Build">

@@ -1,0 +1,36 @@
+﻿@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderBefore })
+
+
+<header>
+    <div class="global-header">
+        <div class="menu-container">
+
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <a class="navbar-brand logo" href="index.html">
+                    @await Component.InvokeAsync(typeof(LogoViewComponent))
+                </a>
+
+                <div class="navbar-collapse collapse">
+
+                    <ul class="navbar-nav mx-auto main-search-box search-box-web">
+                        <li class="nav-item">
+                            @await Component.InvokeAsync(typeof(SearchBoxViewComponent))
+                        </li>
+                    </ul>
+                    <div class="user-content user-content-web">
+                        @await Component.InvokeAsync(typeof(HeaderLinksViewComponent))
+                    </div>                    
+                </div>
+            </nav>
+
+        </div>
+
+
+
+        @await Component.InvokeAsync(typeof(MainMenuViewComponent))
+
+
+    </div>
+
+</header>
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderAfter })

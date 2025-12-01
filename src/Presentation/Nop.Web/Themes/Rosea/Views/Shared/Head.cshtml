@@ -1,0 +1,33 @@
+﻿@using Nop.Core
+@using Nop.Services.Helpers
+@using Nop.Web.Framework.UI
+@inject IWorkContext workContext
+@inject IThemeContext themeContext
+@inject IUserAgentHelper userAgentHelper
+@{
+     var themeName = await themeContext.GetWorkingThemeNameAsync();
+     var supportRtl = (await workContext.GetWorkingLanguageAsync()).Rtl;
+
+
+    //add main CSS file
+    var mainCssFile = $"/Themes/{themeName}/Content/css/styles.css";
+    if (supportRtl)
+    {
+        NopHtml.AppendCssFileParts(mainCssFile, string.Empty);
+    }
+    else
+    {
+        NopHtml.AppendCssFileParts(mainCssFile, string.Empty);
+    }
+    //add jQuery UI css files
+    NopHtml.AppendCssFileParts($"/lib_npm/jquery-ui-dist/jquery-ui.min.css", string.Empty);
+    NopHtml.AppendCssFileParts($"/Themes/{themeName}/Content/css/jquery-ui.min.css", string.Empty);
+    NopHtml.AppendCssFileParts($"/Themes/{themeName}/Content/css/all-fonts.css", string.Empty);
+    NopHtml.AppendCssFileParts($"/Themes/{themeName}/Content/css/bootstrap.min.css", string.Empty);
+    NopHtml.AppendCssFileParts($"/Themes/{themeName}/Content/css/fontawesome.all.min.css", string.Empty);
+    NopHtml.AppendCssFileParts($"/Themes/{themeName}/Content/css/icons.css", string.Empty);
+    NopHtml.AppendCssFileParts($"/Themes/{themeName}/Content/css/owl.carousel.min.css", string.Empty);
+    NopHtml.AppendCssFileParts($"/Themes/{themeName}/Content/css/style.css", string.Empty);
+    NopHtml.AppendCssFileParts($"/Themes/{themeName}/Content/css/zoomple.css", string.Empty);
+    
+}

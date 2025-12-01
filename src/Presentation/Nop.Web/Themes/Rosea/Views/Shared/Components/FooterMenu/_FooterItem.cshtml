@@ -1,0 +1,12 @@
+﻿@model MenuItemModel
+
+<li>
+    @if (!string.IsNullOrEmpty(Model.Url))
+    {
+        <a href="@Model.Url">@Model.Title</a>
+    }
+    else
+    {
+        @Model.Title
+    }
+</li>

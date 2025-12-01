@@ -1,0 +1,27 @@
+/* Scss Document */
+/* Scss Document */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    font-family:'Gotham';
+}
+
+/* Scss Document */
+/*.menu{
+	padding:7px 50px;
+	background:#60ae26;
+	@media(max-width:991px){
+		padding:7px 20px;
+	}
+}*/
+.header {
+  background: #ddd;
+  padding: 50px;
+}
+
+/* Scss Document */
+
+/*# sourceMappingURL=style.css.map */

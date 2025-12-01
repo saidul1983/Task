@@ -1,0 +1,60 @@
+﻿@model FooterModel
+
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Core.Domain.Topics
+
+@inject IWorkContext workContext
+
+<footer>
+    <div class="footer-container">
+
+        <div class="advantages-box">
+            @* to do *@
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <img class="img-fluid float-left pr-2" src="images/free-delivery-icon.png" alt="nop">
+                        <strong class="text-uppercase pt-1 d-block">Free Delivery</strong>
+                        <p class="m-0"> on all orders over $100 </p>
+
+                    </div>
+
+                    <div class="col-md-4 mb-4">
+                        <img class="img-fluid float-left pr-2" src="images/suppor-icon.png" alt="nop"> <strong class="text-uppercase pt-1 d-block"> Support 24/7 </strong>
+                        <p class="m-0"> Call +880 1723456789 </p>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <img class="img-fluid float-left pr-2" src="images/saving-icon.png" alt="nop"> <strong class="text-uppercase pt-1 d-block"> Next day shipping </strong>
+                        <p class="m-0"> 3 day express delivery </p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        @await Component.InvokeAsync(typeof(FooterMenuViewComponent))
+
+        
+        @await Component.InvokeAsync(typeof(StoreThemeSelectorViewComponent))
+    </div>
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.Footer, additionalData = Model })
+</footer>
+
+<script asp-location="Footer">
+    $(function() {
+        $('.block .title').on('click', function () {
+            var e = window, a = 'inner';
+            if (!('innerWidth' in window)) {
+                a = 'client';
+                e = document.documentElement || document.body;
+            }
+            var result = { width: e[a + 'Width'], height: e[a + 'Height'] };
+            if (result.width < 1001) {
+                $(this).siblings('.listbox').slideToggle('slow');
+            }
+        });
+    });
+</script>

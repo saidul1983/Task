@@ -1,0 +1,270 @@
+/* Scss Document */
+/********************header*********************/
+a:hover, .main-menu ul li a:hover{
+	text-decoration:none;
+	color:#ff5874 !important;	
+	transition: all 0.4s;
+}
+.global-header{
+    font-family:'Gotham';
+	background:#27272b;
+	color:#a7a7ac;
+}
+.cart-quantity {
+	background:$theme_color;
+	position: absolute;
+	color:$white_color;
+	border-radius: 50px;
+	padding: 0px 5px;
+	font-size: 12px;
+	display: block;
+	top: 18px;
+	right: -15px;
+	
+	@media(max-width:991px){
+		top: 11px !important;
+		right:32px !important;
+	}
+}
+.menu-container .navbar-toggler{
+	border-color:0;
+	font-size:20px;
+	color:#a7a7ac;
+	padding:0 0 0 20px;
+	outline:none !important;
+}
+.logo{
+	@media(max-width:991px){
+		width:170px !important;
+	}
+	@media(max-width:400px){
+		width:130px !important;
+	}
+}
+/*******search*/
+.main-search-box{
+	width:75%;	
+}
+.main-search-box li {
+	width:85%;
+	margin:auto;	
+}
+.user-content ul li {
+	display: inline-block;
+	padding-left: 10px;
+	font-size:22px;
+}
+.user-content ul li a{
+	color:#a7a7ac;
+}
+.user-content ul{
+	margin:0;
+}
+.main-search-box input {
+	border-radius:3px;
+	border:0;
+}
+.main-search-box .form-control:focus {
+	outline: 0;
+	box-shadow: 0 0 0 0;
+}
+.main-search-box .input-group-text{
+	cursor:pointer;
+	background:#27272b;
+	color:$white_color;	
+}
+.main-search-box .input-group{
+	border: solid 1px #fff !important;
+	border-radius:5px;
+}
+.amber-border{
+	border: solid 1px #fff !important;
+}
+/*******search*/
+
+/****main menu*/
+.main-menu{
+	padding:5px 70px;
+	background:#323237;
+	@media(max-width:991px){
+		display:none !important;
+	}
+}
+.main-menu ul li {
+	display: inline-block;
+	padding: 7px 15px;
+	font-size: 13px;
+	letter-spacing:1px;
+}
+.main-menu ul li a{
+	color: #bebec6 !important;
+}
+.main-menu select {
+	color: #8e95a0;
+	padding: 0px 35px 0px 0px !important;
+	border: solid 1px #323237;
+	appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	-webkit-appearance: none;
+	background: url(../images/select-arrow-dark.svg) #323237;
+	background-size: 12px;
+	background-position: 94%;
+	background-repeat: no-repeat;
+	margin-top: 5px;
+	outline:none !important;
+}
+.main-menu .dropdown-menu{
+	text-transform:capitalize;
+	background:#323237;
+	border:0;
+	border-radius:0;
+}
+.user-content-web, .search-box-web{
+	@media(max-width:991px){
+		display:none !important;
+	}
+		
+}
+/****main menu*/
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+#sidebar {
+    width: 280px;
+    position: fixed;
+    top: 0;
+    left:-290px;
+    height: 100vh;
+    z-index: 999;
+    background: #27272b;
+    color: #fff;
+    transition: all 0.3s;
+    overflow-y: scroll !important;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+#sidebar.active {
+    left: 0;
+}
+#dismiss {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    background: #5a5a5c;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+#dismiss:hover {
+    background:$white_color;
+    color: #7386D5;
+}
+.overlay {
+    display: none;
+    position:fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 998;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+#sidebar .sidebar-header {
+    padding: 20px;
+    background:#6d7fcc;
+}
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+#sidebar ul li a {
+	padding: 10px 20px;
+	display: block;
+	text-transform: uppercase;
+	color: #a7a7ac;
+}
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #5a5a5c;
+}
+#sidebar a[data-toggle="collapse"] {
+    position: relative;
+}
+#sidebar ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background:#000;
+}
+#sidebar ul.CTAs {
+    padding: 20px;
+}
+#sidebar ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+#sidebar a.download {
+    background: #fff;
+    color: #7386D5;
+}
+#sidebar a.article,
+#sidebar a.article:hover {
+    background: #6d7fcc !important;
+    color: #fff !important;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+/********************header*********************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

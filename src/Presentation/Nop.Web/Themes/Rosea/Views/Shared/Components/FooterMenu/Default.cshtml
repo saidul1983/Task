@@ -1,0 +1,58 @@
+﻿@model List<MenuModel>
+
+<div class="footer-link">
+    <div class="footer-nav-content">
+        <div class="container">
+            <div class="row">
+                @foreach (var menu in Model)
+                {
+                    <div class="col-md-3" role="none">
+                        <div class="footer-nav-header" role="menu">
+                            <h5 class="text-uppercase font-weight-bold" id="footer-menu-@menu.Id">@menu.Name</h5>
+
+                            <ul role="menuitem" aria-labelledby="footer-menu-@menu.Id">
+                                @foreach (var menuItem in menu.Items)
+                                {
+                                    @await Html.PartialAsync("_FooterItem.cshtml", menuItem)
+                                }
+                            </ul>
+                        </div>                        
+                    </div>
+                }
+                @await Component.InvokeAsync(typeof(NewsLetterBoxViewComponent))
+            </div>
+            <div class="copyright-container p-3">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="copyright-text">
+                                © Copyright 2018 <a href="#">
+                                    <strong>NopStation</strong>
+                                </a> Themes.
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            @await Component.InvokeAsync(typeof(SocialButtonsViewComponent))
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/public.menu.js" asp-location="Footer"></script>
+<script asp-location="Footer">
+    mainMenu.init('.footer-navigation .footer-menu__toggle', 'footer-menu--active');
+</script>

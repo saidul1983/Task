@@ -1,0 +1,123 @@
+/* buttons style */
+
+/*slider-container*/
+.main-slider .owl-nav{
+	position: absolute;
+	bottom: 0;
+	padding: 10px 0;	
+	@media(max-width:991px){
+		position: relative;
+		padding:0 !important;	
+}
+}
+.main-slider .owl-carousel .owl-nav button.owl-next, 
+.main-slider .owl-carousel .owl-nav button.owl-prev,{
+	color:#fff !important;
+		@media(max-width:991px){
+		color:black !important;
+}	
+}
+
+.slider-container{
+	padding:0 55px;	
+    font-family: 'Gotham';
+	margin-top:30px;
+	@media(max-width:991px){
+		padding:0 !important;
+		margin-top:15px;
+	}
+}
+.category-slider .item,
+.products-slider .item{
+	margin-right:10px;
+		@media(max-width:760px){
+		margin:0 !important;
+	}	
+}
+.category-slider .item a{
+	display:block;
+	position:relative;
+	overflow:hidden;
+}
+.category-slider .item a:hover img {
+	-webkit-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	transform: scale(1.1);
+	transition: all 0.4s;
+}
+.category-slider .item h5,
+.main-slider .item h5 {
+	background:rgba(0,0,0, 0.7);
+	margin:auto;
+	position: absolute;
+	width:100%;
+	bottom:50px;
+	color:$white_color;
+	text-align: center;
+	padding:12px;
+	font-size:14px;
+	font-weight: bold;
+	text-transform:uppercase;
+	z-index:5;
+}
+.category-slider .item:hover h5{
+	background:rgba(255,88,116,0.8);
+}
+.category-slider .owl-carousel .owl-nav,
+.main-slider .owl-carousel .owl-nav,
+.products-slider .owl-carousel .owl-nav,
+.letest-news-container .owl-carousel .owl-nav{
+	float:right;
+	@media(max-width:760px){
+		text-align:center;
+		float:inherit !important;
+	}	
+}
+.category-slider .owl-carousel .owl-nav button.owl-next, 
+.category-slider .owl-carousel .owl-nav button.owl-prev,
+.main-slider .owl-carousel .owl-nav button.owl-next,
+.main-slider .owl-carousel .owl-nav button.owl-prev,
+.products-slider .owl-carousel .owl-nav button.owl-next,
+.products-slider .owl-carousel .owl-nav button.owl-prev,
+.letest-news-container .owl-carousel .owl-nav button.owl-next,
+.letest-news-container .owl-carousel .owl-nav button.owl-prev {
+	border:0;
+	padding: 5px 0 0 15px !important;
+	font: inherit;
+	margin-left: 0px;
+	color:#989696;
+	margin-top:10px;
+	cursor: pointer;
+	text-transform: uppercase;
+	outline:0;
+	font-size:18px !important;
+	
+	&:hover {
+	color:#ff5874 !important;	
+	}
+	
+	i {
+		font-size:20px;
+		font-weight:100;
+	}
+}
+.main-slider{
+	@media(max-width:991px){
+		margin-bottom:15px;
+	}	
+}
+
+/*slider-container*/
+
+
+
+
+
+
+
+
+
+
+
+
+

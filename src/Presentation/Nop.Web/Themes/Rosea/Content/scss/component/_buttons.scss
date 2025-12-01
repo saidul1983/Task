@@ -1,0 +1,105 @@
+/* buttons style */
+.button {
+	padding:5px 10px;
+	background:$white_color;
+	border:1px solid #28282a;
+	cursor:pointer;
+	outline:none !important;
+	color:#28282a;
+	transition: all 0.4s;
+	border-radius:3px;
+	font: {
+		size: 14px;
+		weight: bold;
+	}
+}
+.button:hover{
+	background:$theme_color;
+	color:$white_color;
+	border: solid 1px $theme_color;
+}
+input[type="text"],
+input[type="password"],
+.textarea{
+	border: solid 1px #dee2e6;
+	border-radius:3px;
+	transition: all 0.4s;
+	box-shadow:0 1px 3px #eaecf2, 0 1px 2px #eaecf2;
+}
+input[type="text"]:focus,
+.textarea:focus,
+input[type="password"]:focus{
+	background:#fff;
+	box-shadow:0 0 5px #eee !important;
+}
+
+/*checkbox-design*/
+
+.all-attributes input[type="checkbox"],
+.all-attributes input[type="radio"],
+.personal-details input[type="radio"],
+.company-details input[type="checkbox"],
+.login-page input[type="checkbox"]
+ {
+  display: none;	
+}
+.all-attributes input[type="checkbox"] + label,
+.all-attributes input[type="radio"] + label,
+.personal-details input[type="radio"] + label,
+.company-details input[type="checkbox"] + label,
+.login-page input[type="checkbox"] + label{
+   display: inline-block;
+   height:28px;	
+   width:28px;
+   color: transparent;
+   transition: all 0.2s;
+   font-size: 15px;
+   line-height:28px;
+   text-align: center;
+   cursor:pointer;
+   box-shadow:0 1px 3px #e5e7ed, 0 1px 2px #e5e7ed;
+   	border-radius:3px;
+}
+.all-attributes input[type="checkbox"]:checked + label{
+	color: #fff;
+}
+.all-attributes input[type="radio"] + label,
+.all-attributes input[type="checkbox"] + label,
+.personal-details input[type="radio"] + label,
+.company-details input[type="checkbox"] + label,
+.login-page input[type="checkbox"] + label{
+	background:#fff;
+	border: solid 1px #dee0e6;	
+}
+.all-attributes input[type="radio"]:checked + label,
+.all-attributes input[type="checkbox"]:checked + label,
+.personal-details input[type="radio"]:checked + label,
+.company-details input[type="checkbox"]:checked + label,
+.login-page input[type="checkbox"]:checked + label
+ {
+	color:$theme_color;
+}
+.all-attributes input[type="checkbox"] + label{
+	border-radius:0;
+}
+/*checkbox-design*/
+
+
+/*
+.button-danger {
+ 	@extend .button;
+	background: red;
+	color: #fff;
+}
+
+@mixin button($padding-x,$padding-y,$my-display,$bg-color,$font-color) {
+	display: $my-display;
+	padding: $padding-y $padding-x;
+	background: $bg-color;
+	color: $font-color;	
+	font-size: 18px;
+}
+
+.custom-button {
+	@include button(20px,25px,block,yellow,white);
+	}*/

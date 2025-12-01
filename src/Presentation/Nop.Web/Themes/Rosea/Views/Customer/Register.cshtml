@@ -1,0 +1,569 @@
+﻿@model RegisterModel
+@{
+    Layout = "_ColumnsOne";
+
+    //title
+    NopHtml.AddTitleParts(T("PageTitle.Register").Text);
+    //page class
+    NopHtml.AppendPageCssClassParts("html-registration-page");
+}
+
+<div class="registration-page">
+    <div class="inner-page-bread-crumb">
+        <h3 class="text-uppercase"> <strong> @T("Account.Register") </strong> </h3>
+        <ul>
+            <li><a href="#"> Home </a> </li>
+            <li> <i class="fas fa-caret-right"></i> </li>
+            <li> <a class="active" href="#"> Register </a> </li>
+        </ul>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-md-8 m-auto">
+                <div class="register-page-body p-5 mb-5">
+                    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.RegisterTop, additionalData = Model })
+                    <form asp-route="Register" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post" autocomplete="off">
+                        <div asp-validation-summary="ModelOnly" class="message-error"></div>
+
+
+                        <div class="personal-details">
+                            <h5 class="mb-4 border-bottom pb-2">
+                                <strong>@T("Account.YourPersonalDetails")</strong>
+                            </h5>
+
+                            <div class="row mb-3">
+                                @if (Model.GenderEnabled)
+                                {
+                                    <div class="col-md-3">
+                                        @T("Account.Fields.Gender"):
+                                    </div>
+                                    <div class="col-md-9">
+                                        <ul class="mb-3" id="gender">
+
+                                            <li>
+                                                <input type="radio"
+                                                       asp-for="Gender"
+                                                       value="M"
+                                                       checked="@(Model.Gender == "M")"
+                                                       id="gender-male"
+                                                       name="Gender"
+                                                       class="" />
+
+                                                <label for="gender-male" class="green-color">
+                                                    <i class="fas fa-check" aria-hidden="true"></i>
+                                                    <span class="remember-text">@T("Account.Fields.Gender.Male")</span>
+                                                </label>
+                                            </li>
+
+                                            <li>
+                                                <input type="radio"
+                                                       asp-for="Gender"
+                                                       value="F"
+                                                       checked="@(Model.Gender == "F")"
+                                                       id="gender-female"
+                                                       name="Gender"
+                                                       class="" />
+
+                                                <label for="gender-female" class="green-color">
+                                                    <i class="fas fa-check" aria-hidden="true"></i>
+                                                    <span class="remember-text">@T("Account.Fields.Gender.Female")</span>
+                                                </label>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                }
+
+                                @if (Model.FirstNameEnabled)
+                                {
+                                    <div class="col-md-3">
+                                        <label asp-for="FirstName" asp-postfix=":"></label>
+                                        @if (Model.FirstNameRequired)
+                                        {
+                                            <nop-required />
+                                        }
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span asp-validation-for="FirstName"></span>
+                                        <input class="form-control mb-3" asp-for="FirstName" type="text" />
+                                    </div>
+                                }
+                                @if (Model.LastNameEnabled)
+                                {
+                                    <div class="col-md-3">
+                                        <label asp-for="LastName" asp-postfix=":"></label>
+                                        @if (Model.LastNameRequired)
+                                        {
+                                            <nop-required />
+                                        }
+                                    </div>
+
+                                    <div class="col-md-9">
+                                        <span asp-validation-for="LastName"></span>
+                                        <input class="form-control mb-3" asp-for="LastName" type="text" />
+                                    </div>
+                                }
+
+                                @if (Model.DateOfBirthEnabled)
+                                {
+                                    <div class="row form-group inputs date-of-birth">
+                                        <div class="col-md-2">
+                                            <label>@T("Account.Fields.DateOfBirth"):</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <nop-date-picker asp-day-name="@Html.NameFor(x => x.DateOfBirthDay)"
+                                                             asp-month-name="@Html.NameFor(x => x.DateOfBirthMonth)"
+                                                             asp-year-name="@Html.NameFor(x => x.DateOfBirthYear)"
+                                                             asp-begin-year="@(DateTime.Now.AddYears(-110))"
+                                                             asp-end-year="@(DateTime.UtcNow)"
+                                                             asp-selected-day="@Model.DateOfBirthDay"
+                                                             asp-selected-month="@Model.DateOfBirthMonth"
+                                                             asp-selected-year="@Model.DateOfBirthYear" />
+                                            @if (Model.DateOfBirthRequired)
+                                            {
+                                                <nop-required />
+                                            }
+
+                                        </div>
+                                        <span asp-validation-for="DateOfBirthDay"></span>
+                                        <span asp-validation-for="DateOfBirthMonth"></span>
+                                        <span asp-validation-for="DateOfBirthYear"></span>
+                                    </div>
+                                }
+
+                                <div class="col-md-3">
+                                    <label asp-for="Email" asp-postfix=":"></label>
+                                    <nop-required />
+                                </div>
+                                <div class="col-md-9">
+                                    <span asp-validation-for="Email"></span>
+                                    <input class="form-control mb-3" asp-for="Email" />
+                                </div>
+
+                                @if (Model.EnteringEmailTwice)
+                                {
+                                    <div class="col-md-3">
+                                        <label asp-for="ConfirmEmail" asp-postfix=":"></label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control mb-3" asp-for="ConfirmEmail" />
+                                        <nop-required />
+                                    </div>
+                                    <span asp-validation-for="ConfirmEmail"></span>
+                                }
+
+                                @if (Model.UsernamesEnabled)
+                                {
+                                    <div class="col-md-3">
+                                        <label asp-for="Username" asp-postfix=":"></label>
+                                        <nop-required />
+                                    </div>
+                                    <div class="col-md-9">
+                                        <span asp-validation-for="Username"></span>
+                                        <input class="form-control mb-3" asp-for="Username" />
+
+                                    </div>
+
+                                    @if (Model.CheckUsernameAvailabilityEnabled)
+                                    {
+                                        @await Html.PartialAsync("_CheckUsernameAvailability")
+                                    }
+                                }
+
+                            </div>
+                        </div>
+
+
+                        @if (Model.CompanyEnabled || Model.DisplayVatNumber)
+                        {
+                            <div class="company-details mb-4">
+                                <h5 class="mb-4 border-bottom pb-2"> <strong> @T("Account.CompanyDetails") </strong> </h5>
+                                <div class="row">
+
+                                    @if (Model.CompanyEnabled)
+                                    {
+                                        <div class="col-md-3">
+                                            <label asp-for="Company" asp-postfix=":"></label>
+                                            @if (Model.CompanyRequired)
+                                            {
+                                                <nop-required />
+                                            }
+                                        </div>
+                                        <div class="col-md-9">
+                                            <span asp-validation-for="Company"></span>
+                                            <input class="form-control mb-3" asp-for="Company" />
+                                        </div>
+
+                                    }
+
+                                    @if (Model.DisplayVatNumber)
+                                    {
+                                        <div class="col-md-2">
+                                            <label asp-for="VatNumber" asp-postfix=":"></label>
+                                            @if (Model.VatNumberRequired)
+                                            {
+                                                <nop-required />
+                                            }
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span asp-validation-for="VatNumber"></span>
+                                            <input class="form-control mb-3" asp-for="VatNumber" />
+
+                                        </div>
+                                        <span class="vat-note"><em>@T("Account.Fields.VatNumber.Note")</em></span>
+                                    }
+
+                                </div>
+                            </div>
+                        }
+
+
+                        @if (Model.StreetAddressEnabled ||
+                                                Model.StreetAddress2Enabled ||
+                                                Model.ZipPostalCodeEnabled ||
+                                                Model.CityEnabled ||
+                                                Model.CountyEnabled ||
+                                                Model.CountryEnabled)
+                        {
+                            <div class="company-details mb-4">
+                                <h5 class="mb-4 border-bottom pb-2"> <strong> @T("Account.YourAddress") </strong> </h5>
+                                <div class="personal-details">
+                                    @if (Model.StreetAddressEnabled)
+                                    {
+                                        <div class="row form-group inputs">
+                                            <div class="col-md-3">
+                                                <label asp-for="StreetAddress" asp-postfix=":"></label>
+                                                @if (Model.StreetAddressRequired)
+                                                {
+                                                    <nop-required />
+                                                }
+                                            </div>
+                                            <div class="col-md-9">
+                                                <span asp-validation-for="StreetAddress"></span>
+                                                <input class="form-control mb-3" asp-for="StreetAddress" />
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (Model.StreetAddress2Enabled)
+                                    {
+                                        <div class="row form-group inputs">
+                                            <div class="col-md-3">
+                                                <label asp-for="StreetAddress2" asp-postfix=":"></label>
+                                                @if (Model.StreetAddress2Required)
+                                                {
+                                                    <nop-required />
+                                                }
+                                            </div>
+                                            <div class="col-md-9">
+                                                <span asp-validation-for="StreetAddress2"></span>
+                                                <input class="form-control mb-3" asp-for="StreetAddress2" />
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (Model.ZipPostalCodeEnabled)
+                                    {
+                                        <div class="row form-group inputs">
+                                            <div class="col-md-3">
+                                                <label asp-for="ZipPostalCode" asp-postfix=":"></label>
+                                                @if (Model.ZipPostalCodeRequired)
+                                                {
+                                                    <nop-required />
+                                                }
+                                            </div>
+                                            <div class="col-md-9">
+                                                <span asp-validation-for="ZipPostalCode"></span>
+                                                <input class="form-control mb-3" asp-for="ZipPostalCode" />
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (Model.CountyEnabled)
+                                    {
+                                        <div class="row form-group inputs">
+                                            <div class="col-md-2">
+                                                <label asp-for="County" asp-postfix=":"></label>
+                                                @if (Model.CountyRequired)
+                                                {
+                                                    <nop-required />
+                                                }
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span asp-validation-for="County"></span>
+                                                <input class="form-control mb-3" asp-for="County" />
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (Model.CityEnabled)
+                                    {
+                                        <div class="row form-group inputs">
+                                            <div class="col-md-2">
+                                                <label asp-for="City" asp-postfix=":"></label>
+                                                @if (Model.CityRequired)
+                                                {
+                                                    <nop-required />
+                                                }
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span asp-validation-for="City"></span>
+                                                <input class="form-control mb-3" asp-for="City" />
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (Model.CountryEnabled)
+                                    {
+                                        <div class="row form-group inputs">
+                                            <div class="col-md-2">
+                                                <label asp-for="CountryId" asp-postfix=":"></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select asp-for="CountryId" asp-items="Model.AvailableCountries"
+                                                        data-trigger="country-select"
+                                                        data-url="@(Url.RouteUrl("GetStatesByCountryId"))"
+                                                        data-stateprovince="#@Html.IdFor(model => model.StateProvinceId)"
+                                                        data-loading="#states-loading-progress"></select>
+                                                @if (Model.CountryRequired)
+                                                {
+                                                    <nop-required />
+                                                }
+                                            </div>
+                                            <span asp-validation-for="CountryId"></span>
+                                        </div>
+                                    }
+                                    @if (Model.CountryEnabled && Model.StateProvinceEnabled)
+                                    {
+                                        <div class="row form-group inputs">
+                                            <div class="col-md-2">
+                                                <label asp-for="StateProvinceId" asp-postfix=":"></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select asp-for="StateProvinceId" asp-items="Model.AvailableStates"></select>
+                                                @if (Model.StateProvinceRequired)
+                                                {
+                                                    <nop-required />
+                                                }
+                                            </div>
+                                            <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait")</span>
+                                            <span asp-validation-for="StateProvinceId"></span>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        @if (Model.PhoneEnabled || Model.FaxEnabled)
+                        {
+                            <div class="personal-details">
+                                <h5 class="mb-4 border-bottom pb-2">
+                                    <strong>@T("Account.YourContactInformation")</strong>
+                                </h5>
+                                <div class="row mb-3">
+                                    @if (Model.PhoneEnabled)
+                                    {
+                                        <div class="col-md-3">
+                                            <label asp-for="Phone" asp-postfix=":"></label>
+                                            @if (Model.PhoneRequired)
+                                            {
+                                                <nop-required />
+                                            }
+                                        </div>
+                                        <div class="col-md-9">
+                                            <span asp-validation-for="Phone"></span>
+                                            <input class="form-control mb-3" asp-for="Phone" />
+                                        </div>
+                                    }
+                                    @if (Model.FaxEnabled)
+                                    {
+                                        <div class="col-md-3">
+                                            <label asp-for="Fax" asp-postfix=":"></label>
+                                            @if (Model.FaxRequired)
+                                            {
+                                                <nop-required />
+                                            }
+                                        </div>
+                                        <div class="col-md-9">
+                                            <span asp-validation-for="Fax"></span>
+                                            <input class="form-control mb-3" asp-for="Fax" />
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        @if (Model.NewsletterEnabled || Model.CustomerAttributes.Count > 0)
+                        {
+                            <div class="fieldset">
+                                <div class="title">
+                                    <strong>@T("Account.Options")</strong>
+                                </div>
+                                <div class="form-fields">
+                                    @if (Model.NewsletterEnabled)
+                                    {
+                                        <div class="row form-group inputs">
+                                            <div class="col-md-2">
+                                                <label asp-for="NewsLetterSubscriptions" asp-postfix=":"></label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input asp-for="NewsLetterSubscriptions" />
+                                            </div>
+                                            <span asp-validation-for="NewsLetterSubscriptions"></span>
+                                        </div>
+                                    }
+                                    @if (Model.CustomerAttributes.Count > 0)
+                                    {
+                                        @await Html.PartialAsync("_CustomerAttributes", Model.CustomerAttributes)
+                                    }
+                                </div>
+                            </div>
+                        }
+                        @if (Model.AllowCustomersToSetTimeZone)
+                        {
+                            <div class="fieldset">
+                                <div class="title">
+                                    <strong>@T("Account.Preferences")</strong>
+                                </div>
+                                <div class="form-fields">
+                                    <div class="row form-group inputs">
+                                        <div class="col-md-2">
+                                            <label asp-for="TimeZoneId" asp-postfix=":"></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select asp-for="TimeZoneId" asp-items="Model.AvailableTimeZones"></select>
+                                        </div>
+                                        <span asp-validation-for="TimeZoneId"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="personal-details">
+                            <h5 class="mb-4 border-bottom pb-2">
+                                <strong>@T("Account.YourPassword")</strong>
+                            </h5>
+                            <div class="row mb-3">
+                                <div class="col-md-3">
+                                    <label asp-for="Password" asp-postfix=":"></label>
+                                    <nop-required />
+                                </div>
+                                <div class="col-md-9">
+                                    <span asp-validation-for="Password"></span>
+                                    <input class="form-control mb-3" asp-for="Password" />
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <label asp-for="ConfirmPassword" asp-postfix=":"></label>
+                                    <nop-required />
+                                </div>
+                                <div class="col-md-9">
+                                    <span asp-validation-for="Password"></span>
+                                    <input class="form-control mb-3" asp-for="ConfirmPassword" />
+
+                                </div>
+
+                                @if (Model.DisplayCaptcha)
+                                {
+                                    <nop-captcha />
+                                }
+                                @if (Model.HoneypotEnabled)
+                                {
+                                    @Html.Raw(Html.GenerateHoneypotInput())
+                                }
+                            </div>
+                        </div>
+
+                        @if (Model.AcceptPrivacyPolicyEnabled || Model.GdprConsents.Count > 0)
+                        {
+                            <div class="fieldset">
+                                <div class="title">
+                                    <strong>@T("Account.UserAgreement")</strong>
+                                </div>
+                                <div class="form-fields">
+                                    @if (Model.AcceptPrivacyPolicyEnabled)
+                                    {
+                                        <script asp-location="Footer">
+                                            $(document).ready(function() {
+                                                $('#register-button').on('click', function() {
+                                                    if ($('#accept-consent').is(':checked')) {
+                                                        //do some stuff
+                                                        return true;
+                                                    } else {
+                                                        //just show validation errors, don't post
+                                                        alert('@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(T("Account.Fields.AcceptPrivacyPolicy.Required").Text))');
+                                                        return false;
+                                                    }
+                                                });
+                                            });
+                                        </script>
+                                        <div class="inputs accept-consent">
+                                            <input id="accept-consent" type="checkbox" name="accept-consent" />
+                                            <label for="accept-consent">@T("Account.Fields.AcceptPrivacyPolicy")</label>
+                                            @if (Model.AcceptPrivacyPolicyPopup)
+                                            {
+                                                <span class="read" id="read-privacyinfo">@T("Account.Fields.AcceptPrivacyPolicy.Read")</span>
+                                                <script asp-location="Footer">
+                                                    $(document).ready(function() {
+                                                        $('#read-privacyinfo').on('click',
+                                                            function(e) {
+                                                                displayPopupContentFromUrl(
+                                                                    '@Url.RouteUrl("TopicPopup", new { SystemName = "privacyinfo" })',
+                                                                    '@T("Account.Fields.AcceptPrivacyPolicy")');
+                                                            });
+                                                    });
+                                                </script>
+                                            }
+                                            else
+                                            {
+                                                <a class="read" id="read-privacyinfo" href="@Url.RouteTopicUrl("privacyinfo")">@T("Account.Fields.AcceptPrivacyPolicy.Read")</a>
+                                            }
+                                        </div>
+                                    }
+
+                                    @if (Model.GdprConsents.Count > 0)
+                                    {
+                                        foreach (var consent in Model.GdprConsents)
+                                        {
+                                            if (consent.IsRequired)
+                                            {
+                                                <script asp-location="Footer">
+                                                    $(document).ready(function() {
+                                                        $('#register-button').on('click', function() {
+                                                            if ($('#consent@(consent.Id)').is(':checked')) {
+                                                                    //do some stuff
+                                                                    return true;
+                                                                } else {
+                                                                    //just show validation errors, don't post
+                                                               alert('@Html.Raw(System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(consent.RequiredMessage))');
+                                                                    return false;
+                                                                }
+                                                            });
+                                                    });
+                                                </script>
+                                            }
+                                            <div class="inputs accept-consent">
+                                                <input id="consent@(consent.Id)" type="checkbox" name="consent@(consent.Id)" checked="@consent.Accepted" />
+                                                <label for="consent@(consent.Id)">@consent.Message</label>
+                                            </div>
+                                        }
+
+                                    }
+                                </div>
+                            </div>
+                        }
+
+                        <div class="buttons">
+                            <button type="submit" name="register-button" id="register-button" class="register-button w-25">@T("Account.Register.Button")</button>
+                        </div>
+                    </form>
+
+                    <div class="external-authentication">
+                        @await Component.InvokeAsync(typeof(ExternalMethodsViewComponent), "ExternalAuthentication")
+                    </div>
+                    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.RegisterBottom, additionalData = Model })
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
