@@ -27,13 +27,13 @@
     @await Html.PartialAsync("_ExternalAuthentication.Errors")
 
     <div class="container">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LoginTop, additionalData = Model })
         <div class="row no-gutters">
             <div class="col-md-12 m-auto">
                 <div class="register-page-body p-5 mb-5">
-                    <form>
+                    <form asp-route="Login" asp-route-returnurl="@Context.Request.Query["ReturnUrl"]" method="post" autocomplete="off">
+                        <div asp-validation-summary="ModelOnly" class="message-error">@T("Account.Login.Unsuccessful")</div>
                         <div class="personal-details">
-
-
                             <div class="row mb-3">
 
                                 <div class="col-md-5">
@@ -77,93 +77,81 @@
                                                     </div>
                                                 </div>
                                             }
-
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-7">
                                     <h5 class="mb-4 border-bottom pb-2"> <strong> @T("Account.Login.ReturningCustomer") </strong> </h5>
+
                                     <div class="row no-gutters">
                                         @if (Model.UsernamesEnabled)
                                         {
-                                            @* UserName *@
-                                            <div class="col-md-3">
-                                                <label asp-for="Username" asp-postfix=":"></label>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input asp-for="Username" class="form-control mb-3" type="text" autofocus="autofocus" />
+                                            <div class="row form-group inputs">
+                                                <div class="col-md-3">
+                                                    <label asp-for="Username" asp-postfix=":"></label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input asp-for="Username" class="form-control username" autofocus="autofocus" />
+                                                </div>
                                                 <span asp-validation-for="Username"></span>
                                             </div>
                                         }
                                         else
                                         {
-                                            @* Email *@
                                             <div class="col-md-3">
                                                 <label asp-for="Email" asp-postfix=":"></label>
                                             </div>
                                             <div class="col-md-9">
-                                                <input asp-for="Email" class="form-control mb-3" type="text" autofocus="autofocus" />
-                                                <span asp-validation-for="Email"></span>
+                                                <input asp-for="Email" class="form-control mb-3" autofocus="autofocus" />
                                             </div>
+                                            <span asp-validation-for="Email"></span>
                                         }
-
-                                        @* Password *@
                                         <div class="col-md-3">
                                             <label asp-for="Password" asp-postfix=":"></label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input class="form-control mb-3" asp-for="Password" type="password" />
+                                            <input asp-for="Password" class="form-control mb-3" />
+                                            <span class="password-eye"></span>
                                         </div>
+                                        <span asp-validation-for="Password"></span>
 
 
-                                        <div class="col-md-3">
-                                        </div>
+                                        <div class="col-md-3"></div>
+
                                         <div class="col-md-9">
-                                            <input asp-for="RememberMe" />
-                                            <label asp-for="RememberMe" class="green-color">
-                                                <i class="fas fa-check"
-                                                   aria-hidden="true"></i>
+                                            <input id="checkbox-box-2" asp-for="RememberMe" />
+                                            <label for="checkbox-box-2" class="green-color">
+                                                <i class="fas fa-check" aria-hidden="true"></i>
                                             </label>
-                                            <label asp-for="RememberMe"></label>
-                                            <a class="pl-2" href="#">
-                                                <span class="forgot-password">
-                                                    <a asp-route="@NopRouteNames.Standard.PASSWORD_RECOVERY">@T("Account.Login.ForgotPassword")</a>
-                                                </span>
-                                            </a>
-                                            @if (Model.DisplayCaptcha)
-                                            {
-                                                <nop-captcha />
-                                            }
-                                            <p class="mt-4"> <button class="register-button w-50"> @T("Account.Login") </button> </p>
+                                            <label asp-for="RememberMe"></label> 
+                                            
+                                            <span class="forgot-password">
+                                                <a class="pl-2" asp-route="PasswordRecovery">@T("Account.Login.ForgotPassword")</a>
+                                            </span>
                                         </div>
+
+                                        @if (Model.DisplayCaptcha)
+                                        {
+                                            <nop-captcha />
+                                        }
+                                    </div>
+                                    <div class="buttons">
+                                        <button type="submit" class="register-button w-50">@T("Account.Login.LoginButton")</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
-                        <div class=" make-your-password  mb-4">
-                            @await Component.InvokeAsync(typeof(TopicBlockViewComponent), new { systemName = "LoginRegistrationInfo" })
-                        </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
 
-
-
-    <div class="page-body">
-        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LoginTop, additionalData = Model })
-        <div class="customer-blocks">
-            
-            
+            <div class="external-authentication">
+                @await Component.InvokeAsync(typeof(ExternalMethodsViewComponent), "ExternalAuthentication")
+            </div>
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LoginBottom, additionalData = Model })
         </div>
-        <div class="external-authentication">
-            @await Component.InvokeAsync(typeof(ExternalMethodsViewComponent), "ExternalAuthentication")
-        </div>
-        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LoginBottom, additionalData = Model })
     </div>
 </div>
 
