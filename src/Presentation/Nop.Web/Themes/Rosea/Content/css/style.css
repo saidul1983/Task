@@ -1322,3 +1322,14 @@ input[type="password"]:focus {
 /******Products box******/
 
 /*# sourceMappingURL=style.css.map */
+
+
+.password-eye {
+  position: absolute;
+  right: 5%;
+  top: 56%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+}
+
