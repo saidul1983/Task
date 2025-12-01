@@ -89,6 +89,12 @@
     <Folder Include="Themes\Rosea\Views\Shared\Components\CheckoutProgress\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Themes\Rosea\Views\Customer\RegisterResult.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
   <!-- This target execute after "Build" target.
     We use it to clean up folder with plugins from unnecessary and obsolete libraries. -->
   <Target Name="NopTarget" AfterTargets="Build">

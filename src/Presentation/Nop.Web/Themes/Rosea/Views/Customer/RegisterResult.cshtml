@@ -1,0 +1,15 @@
+﻿@model RegisterResultModel
+@{
+    Layout = "_ColumnsOne";
+
+}
+
+
+<div class="col-md-12 mt-3 text-center">
+    <h5 class="mb-4 border-bottom pb-2"> <strong> @T("Account.Register") </strong> </h5>
+    @Model.Result
+    <p class="mt-5">
+        <a href="@Model.ReturnUrl" class="register-button w-50">@T("Common.Continue")</a>
+    </p>
+</div>
+
