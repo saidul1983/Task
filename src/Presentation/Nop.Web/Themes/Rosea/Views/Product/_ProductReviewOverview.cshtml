@@ -1,0 +1,42 @@
+﻿@model ProductReviewOverviewModel
+@{
+    var ratingPercent = 0;
+    var noReviews = Model.TotalReviews == 0;
+    if (!noReviews)
+    {
+        ratingPercent = ((Model.RatingSum * 100) / Model.TotalReviews) / 5;
+    }
+    int starCount = (int)Math.Round(ratingPercent / 20.0);
+}
+
+@if (Model.AllowCustomerReviews)
+{
+    <div class="product-reviews-overview">
+
+        <div class="product-review-star float-left pr-2">
+            <p class="star-icon">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    if (i <= starCount)
+                    {
+                        <i class="fas fa-star"></i>
+                    }
+                    else
+                    {
+                        <i class="far fa-star"></i>
+                    }
+                }
+            </p>
+        </div>
+
+        <div class="product-review-links float-left">
+            (@Model.TotalReviews reviews)
+
+            @if (Model.CanAddNewReview && Model.CanCurrentCustomerLeaveReview)
+            {
+                <a href="#addreview"> Write a review</a>
+            }
+        </div>
+
+    </div>
+}

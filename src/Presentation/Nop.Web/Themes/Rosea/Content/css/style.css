@@ -3,7 +3,19 @@
 /* Scss Document */
 * {
   margin: 0;
-  padding: 0;
+  /*  padding: 0;*/
+  text-decoration: none;
+}
+
+  *, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+html {
+  margin: -25px;
+  -webkit-text-size-adjust: none;
 }
 
 body {
@@ -1417,3 +1429,32 @@ color: #01619d;
 .block-popular-tags .buttons .view-all {
   float: left;
 }
+
+
+.admin-header-links {
+  background-color: #333;
+  text-align: center;
+  color: #eee;
+}
+
+  .admin-header-links * {
+    display: inline-block;
+    margin: 0 10px;
+    line-height: 35px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .admin-header-links .impersonate {
+    display: inline-block;
+  }
+
+    .admin-header-links .impersonate a {
+      background-color: #555;
+      padding: 0 15px;
+    }
+
+      .admin-header-links .impersonate a:hover,
+      .admin-header-links .impersonate a:focus {
+        background-color: #666;
+      }

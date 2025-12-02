@@ -1,0 +1,10 @@
+﻿@model ProductDetailsModel
+@{
+    var addtocomparelink = Url.RouteUrl(NopRouteNames.Ajax.ADD_PRODUCT_TO_COMPARE, new { productId = Model.Id });
+}
+@if (Model.CompareProductsEnabled)
+{
+    <div class="compare-products">
+        <button type="button" class="button overview-button" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;"><i class="fas fa-retweet d-none d-md-block p-1"></i></button>
+    </div>
+}
