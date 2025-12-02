@@ -6,7 +6,6 @@
 @inject CatalogSettings catalogSettings
 @inject IWorkContext workContext
 @{
-    //prepare "Add to cart" AJAX link
     var addtocartlink = "";
     var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
     var quantity = 1;
@@ -22,22 +21,24 @@
     var addtowishlistlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = (int)ShoppingCartType.Wishlist, quantity = quantity });
     var addtocomparelink = Url.RouteUrl("AddProductToCompare", new { productId = Model.Id });
 }
-<div class="product-item" data-productid="@Model.Id">
-    <div class="picture">
-        <a href="@(Url.RouteUrl<Product>(new { SeName = Model.SeName }))" title="@Model.PictureModels.FirstOrDefault().Title">
-            <img class="img-thumbnail" alt="@Model.PictureModels.FirstOrDefault().AlternateText" src="@Model.PictureModels.FirstOrDefault().ImageUrl" title="@Model.PictureModels.FirstOrDefault().Title" />
-        </a>
-    </div>
-    <div class="white-box">
-        <h2 class="product-title">
+
+
+<div class="products-box" data-productid="@Model.Id">
+    <a href="@(Url.RouteUrl<Product>(new { SeName = Model.SeName }))" title="@Model.PictureModels.FirstOrDefault().Title">
+        <img class="img-fluid w-100" alt="@Model.PictureModels.FirstOrDefault().AlternateText" src="@Model.PictureModels.FirstOrDefault().ImageUrl" title="@Model.PictureModels.FirstOrDefault().Title" />
+    </a>
+
+    <div class="products-item-details">
+        <p class="product-title bg-cyan">
             <a href="@(Url.RouteUrl<Product>(new { SeName = Model.SeName }))">@Model.Name</a>
-        </h2>
+        </p>
         @if (catalogSettings.ShowSkuOnCatalogPages && !string.IsNullOrEmpty(Model.Sku))
         {
-            <div class="sku">
+            <p class="sku">
                 @Model.Sku
-            </div>
+            </p>
         }
+
         @if (Model.ReviewOverviewModel.AllowCustomerReviews)
         {
             var ratingPercent = 0;
@@ -52,54 +53,66 @@
                 </div>
             </div>
         }
-        <div class="description">
+
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBoxAddinfoBefore, additionalData = Model })
+        @* Price informations *@
+        @if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice))
+        {
+            <span class="price old-price">@Model.ProductPrice.OldPrice</span>
+        }
+        <h5 class="m-0"> <strong>@Model.ProductPrice.Price</strong> </h5>
+        @if (Model.ProductPrice.DisplayTaxShippingInfo)
+        {
+            var inclTax = await workContext.GetTaxDisplayTypeAsync() == TaxDisplayType.IncludingTax;
+            <span class="tax-shipping-info">
+                @T(inclTax ? "Products.Price.TaxShipping.InclTax" : "Products.Price.TaxShipping.ExclTax", Url.RouteTopicUrl("shippinginfo"))
+            </span>
+        }
+        @if (!string.IsNullOrEmpty(Model.ProductPrice.BasePricePAngV))
+        {
+            <div class="base-price-pangv">
+                @Model.ProductPrice.BasePricePAngV
+            </div>
+        }
+
+        <p class="description">
             @Html.Raw(Model.ShortDescription)
+        </p>
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBoxAddinfoMiddle, additionalData = Model })
+        <div class="buttons mb-2">
+            @if (!Model.ProductPrice.DisableAddToCompareListButton)
+            {
+                <button type="button" class="button-2 add-to-compare-list-button" title="@T("ShoppingCart.AddToCompareList")" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;"><i class="fas fa-retweet p-1"></i></button>
+            }
+            @if (!Model.ProductPrice.DisableBuyButton)
+            {
+                var addToCartText = T("ShoppingCart.AddToCart").Text;
+                if (Model.ProductPrice.IsRental)
+                {
+                    addToCartText = T("ShoppingCart.Rent").Text;
+                }
+                if (Model.ProductPrice.AvailableForPreOrder)
+                {
+                    addToCartText = T("ShoppingCart.PreOrder").Text;
+                }
+                <button type="button" class="button" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;">@(addToCartText)</button>
+            }
+
+            @if (!Model.ProductPrice.DisableWishlistButton)
+            {
+                @await Html.PartialAsync("_MoveToWishlistModal", Model.ProductToWishlist)
+
+                <button type="button" class="button-2 add-to-wishlist-button" title="@T("ShoppingCart.AddToWishlist")" onclick="AjaxCart.addproducttocart_catalog('@addtowishlistlink');return false;"><strong class="icon-love p-1"></strong></button>
+            }
         </div>
 
-    </div>
-    <div class="ash-box">
-        <div class="add-info">
-            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBoxAddinfoBefore, additionalData = Model })
-            <div class="prices">
-                @if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice))
-                {
-                    <span class="price old-price">@Model.ProductPrice.OldPrice</span>
-                }
-                <span class="price actual-price">@Model.ProductPrice.Price</span>
-                @if (Model.ProductPrice.DisplayTaxShippingInfo)
-                {
-                    var inclTax = await workContext.GetTaxDisplayTypeAsync() == TaxDisplayType.IncludingTax;
-                    //tax info is already included in the price (incl/excl tax). that's why we display only shipping info here
-                    //of course, you can modify appropriate locales to include VAT info there
-                    <span class="tax-shipping-info">
-                        @T(inclTax ? "Products.Price.TaxShipping.InclTax" : "Products.Price.TaxShipping.ExclTax", Url.RouteTopicUrl("shippinginfo"))
-                    </span>
-                }
-                @if (!string.IsNullOrEmpty(Model.ProductPrice.BasePricePAngV))
-                {
-                    <div class="base-price-pangv">
-                        @Model.ProductPrice.BasePricePAngV
-                    </div>
-                }
-            </div>
-            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBoxAddinfoMiddle, additionalData = Model })
-            <div class="buttons">
-                @*<button type="button" class="button-1 product-box-detail-button" onclick="setLocation('@Url.RouteUrl("Product", new { SeName = Model.SeName })')">@T("Products.Details")</button>*@
-                @if (!Model.ProductPrice.DisableBuyButton)
-                {
-                    var addToCartText = T("ShoppingCart.AddToCart").Text;
-                    if (Model.ProductPrice.IsRental)
-                    {
-                        addToCartText = T("ShoppingCart.Rent").Text;
-                    }
-                    if (Model.ProductPrice.AvailableForPreOrder)
-                    {
-                        addToCartText = T("ShoppingCart.PreOrder").Text;
-                    }
-                    <button type="button" class="button-2 product-box-add-to-cart-button btn btn-sm btn-primary" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;">@(addToCartText)</button>
-                }
-            </div>
-            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBoxAddinfoAfter, additionalData = Model })
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBoxAddinfoAfter, additionalData = Model })
+
+        @* to do *@
+        <div class="offer-content">
+            <div class="offer-box"> -50% </div>
+            <div class="offer-box new-products"> New </div>
         </div>
+
     </div>
 </div>
