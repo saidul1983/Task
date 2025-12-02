@@ -15,7 +15,7 @@ Layout = "_Root.Head";
     </script>
 
     <div class="slider-container"></div>
-    <div class="featured-products-container">
+    <div class="page-bg-container"> @* for product details page *@
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentBefore })
 
 

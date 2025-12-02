@@ -64,7 +64,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Themes\Rosea\Views\Product\" />
     <Folder Include="Themes\Rosea\Views\ReturnRequest\" />
     <Folder Include="Themes\Rosea\Views\Order\" />
     <Folder Include="Themes\Rosea\Views\News\" />
@@ -107,6 +106,9 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Themes\Rosea\Views\Customer\RegisterResult.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Rosea\Views\Product\_ProductBreadcrumb.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Themes\Rosea\Views\Shared\Components\HomepageCategories\Default.cshtml">
