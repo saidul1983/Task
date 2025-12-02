@@ -64,11 +64,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Themes\Rosea\Views\ReturnRequest\" />
     <Folder Include="Themes\Rosea\Views\Product\" />
+    <Folder Include="Themes\Rosea\Views\ReturnRequest\" />
     <Folder Include="Themes\Rosea\Views\Order\" />
     <Folder Include="Themes\Rosea\Views\News\" />
-    <Folder Include="Themes\Rosea\Views\Home\" />
     <Folder Include="Themes\Rosea\Views\Common\" />
     <Folder Include="Themes\Rosea\Views\Checkout\" />
     <Folder Include="Themes\Rosea\Views\Boards\" />
@@ -76,10 +75,8 @@
     <Folder Include="Themes\Rosea\Views\Shared\Components\RelatedProducts\" />
     <Folder Include="Themes\Rosea\Views\Shared\Components\ProductsAlsoPurchased\" />
     <Folder Include="Themes\Rosea\Views\Shared\Components\OrderSummary\" />
-    <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageProducts\" />
     <Folder Include="Themes\Rosea\Views\Shared\Components\HomepagePolls\" />
     <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageNews\" />
-    <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageCategories\" />
     <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageBestSellers\" />
     <Folder Include="Themes\Rosea\Views\Shared\Components\CheckoutProgress\" />
   </ItemGroup>
@@ -91,6 +88,12 @@
     <Content Update="Themes\Rosea\Views\Catalog\_CatalogFilters.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+    <Content Update="Themes\Rosea\Views\Catalog\_CatalogProducts.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Rosea\Views\Catalog\_CatalogSelectors.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Themes\Rosea\Views\Catalog\_FilterManufacturerBox.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
@@ -100,7 +103,16 @@
     <Content Update="Themes\Rosea\Views\Catalog\_FilterSpecsBox.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+    <Content Update="Themes\Rosea\Views\Catalog\_ProductsInGridOrLines.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Themes\Rosea\Views\Customer\RegisterResult.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Rosea\Views\Shared\Components\HomepageCategories\Default.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Rosea\Views\Shared\Components\HomepageProducts\Default.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
   </ItemGroup>

@@ -14,7 +14,8 @@ Layout = "_Root.Head";
         AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart', localized_data);
     </script>
 
-    <div class="page-bg-container">
+    <div class="slider-container"></div>
+    <div class="featured-products-container">
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentBefore })
 
 
