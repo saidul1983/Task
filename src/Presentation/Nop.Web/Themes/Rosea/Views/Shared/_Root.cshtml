@@ -16,12 +16,15 @@ Layout = "_Root.Head";
 
     <div class="page-bg-container">
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentBefore })
+
+
         @if (IsSectionDefined("Breadcrumb"))
         {
             @RenderSection("Breadcrumb")
         }
 
-        @RenderBody();
+        @RenderBody()
+
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentAfter })
 
     </div>

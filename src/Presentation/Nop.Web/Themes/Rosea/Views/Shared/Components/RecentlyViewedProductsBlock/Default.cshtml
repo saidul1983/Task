@@ -1,0 +1,43 @@
+﻿@model IList<ProductOverviewModel>
+
+@using Nop.Core.Domain.Catalog
+
+@if (Model.Count > 0)
+{
+    <div class="recently-viewed-box">
+        <div class="panel panel-default">
+
+            <div class="panel-heading" role="tab" id="headingfour">
+                <h4 class="panel-title text-uppercase titel mb-4">
+                    <a class="" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapsefour" aria-expanded="false"
+                       aria-controls="collapsefour"> @T("Products.RecentlyViewedProducts") </a>
+                </h4>
+            </div>
+
+            <div id="collapsefour" class="panel-collapse collapse show in"
+                 role="tabpanel" aria-labelledby="headingfour" data-parent="#accordion">
+                <div class="panel-body">
+                    <ul>
+                        @for (var i = 0; i < Model.Count; i++)
+                        {
+                            var product = Model[i];
+                            var picture = product.PictureModels.FirstOrDefault();
+                            <li @(i == Model.Count - 1 ? @Html.Raw(" class=\"last\"") : null)>
+                                @if (picture != null && !string.IsNullOrEmpty(picture.ImageUrl))
+                                {
+                                    <a class="d-block" href="@(await NopUrl.RouteGenericUrlAsync<Product>(new { SeName = product.SeName }))" title="@picture.Title">
+                                        <div class="float-left pr-3">
+                                            <img alt="@picture.AlternateText" src="@picture.ImageUrl" title="@picture.Title" />
+                                        </div>
+                                    </a>
+                                }
+                                <a class="product-name" href="@(await NopUrl.RouteGenericUrlAsync<Product>(new { SeName = product.SeName }))">@product.Name</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}

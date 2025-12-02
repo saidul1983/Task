@@ -1,0 +1,51 @@
+﻿@model ManufacturerFilterModel
+
+<div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="manufacturerHeading">
+        <h4 class="panel-title text-uppercase titel mb-4">
+            <a class="" data-toggle="collapse" data-parent="#accordion"
+               href="#collapseManufacturerHeading" aria-expanded="true"
+               aria-controls="collapseManufacturerHeading"> @T("Filtering.ManufacturerFilter") </a>
+        </h4>
+    </div>
+    <div id="collapseManufacturerHeading" class="panel-collapse collapse show in" role="tabpanel" aria-labelledby="manufacturerHeading" data-parent="#accordion">
+        <div class="panel-body">
+            <ul>
+                @foreach (var manufacturer in Model.Manufacturers)
+                {
+                    <li>
+                        <input id="attribute-manufacturer-@manufacturer.Value" type="checkbox" data-manufacturer-id="@manufacturer.Value" checked="@manufacturer.Selected" />
+                        <label for="attribute-manufacturer-@manufacturer.Value">
+                            @manufacturer.Text
+                        </label>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<script asp-location="Footer">
+    console.log("Starting jQuery:", typeof jQuery);
+    $(function() {
+        console.log("SCRIPT LOADED");
+
+        var $msEls = $('[data-manufacturer-id]');
+        console.log("menufacturer ms els : ", $msEls);
+        $msEls.on('change', function () {
+            CatalogProducts.getProducts();
+        });
+
+        $(CatalogProducts).on('before', function (e) {
+            var selectedMs = $.map($msEls, function (el) {
+                var $mEl = $(el);
+                if ($mEl.is(':checked')) return $mEl.data('manufacturer-id')
+                return null;
+            });
+
+            if (selectedMs && selectedMs.length > 0) {
+                e.payload.urlBuilder
+                    .addParameter('ms', selectedMs.join(','));
+            }
+        });
+    });
+</script>

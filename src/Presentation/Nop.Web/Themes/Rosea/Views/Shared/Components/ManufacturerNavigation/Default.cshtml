@@ -1,0 +1,38 @@
+﻿@model ManufacturerNavigationModel
+
+@using Nop.Core.Domain.Catalog
+
+@if (Model.Manufacturers.Count > 0)
+{
+    <div class="manufacturers-box">
+        <div class="panel panel-default">
+
+            <div class="panel-heading" role="tab" id="headingtwo">
+                <h4 class="panel-title text-uppercase titel mb-4">
+                    <a class="" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapsetwo" aria-expanded="false"
+                       aria-controls="collapsetwo"> @T("Manufacturers") </a>
+                </h4>
+            </div>
+
+            <div id="collapsetwo" class="panel-collapse collapse show in" role="tabpanel" aria-labelledby="headingtwo" data-parent="#accordion">
+                <div class="panel-body">
+                    <ul>
+                        @foreach (var manufacturer in Model.Manufacturers)
+                        {
+                            <li class="@(manufacturer.IsActive ? "active" : "inactive")">
+                                <a href="@(await NopUrl.RouteGenericUrlAsync<Manufacturer>(new { SeName = manufacturer.SeName }))">@manufacturer.Name</a>
+                            </li>
+                        }
+                    </ul>
+                    @if (Model.TotalManufacturers > Model.Manufacturers.Count)
+                    {
+                        <div class="view-all">
+                            <a href="@Url.RouteUrl(NopRouteNames.General.MANUFACTURERS)">@T("Manufacturers.ViewAll")</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
