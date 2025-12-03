@@ -1,0 +1,17 @@
+﻿@model MenuItemModel
+
+@if (Model.ChildrenItems.Any())
+{
+    @await Html.PartialAsync("_MenuItem.cshtml", Model)
+
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown" aria-labelledby="@Model.Id">
+        @foreach (var item in Model.ChildrenItems)
+        {
+            @await Html.PartialAsync("_MenuItem.List.cshtml", item)
+        }
+    </div>
+}
+else
+{
+    @await Html.PartialAsync("_MenuItem.cshtml", Model)
+}

@@ -13,7 +13,9 @@
     @{
         await Html.RenderPartialAsync("_Header");
     }
-
+    <div class="header-menu">
+        @await Component.InvokeAsync(typeof(MainMenuViewComponent))
+    </div>
     <main class="master-wrapper-content" id="main">
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentBefore })
 

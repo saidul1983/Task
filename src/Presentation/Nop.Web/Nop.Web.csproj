@@ -141,6 +141,21 @@
     <Content Update="Themes\Rosea\Views\Shared\Components\HomepageProducts\Default.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+    <Content Update="Themes\Rosea\Views\Shared\Components\MainMenu\Default.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Rosea\Views\Shared\Components\MainMenu\_MenuItem.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Rosea\Views\Shared\Components\MainMenu\_MenuItem.Grid.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Rosea\Views\Shared\Components\MainMenu\_MenuItem.List.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Rosea\Views\Shared\Components\SearchBox\Default.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Themes\Rosea\Views\Shared\_ColumnsOne.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

@@ -1,0 +1,77 @@
+﻿@model MenuModel
+
+@using Nop.Core.Domain.Menus;
+@inject Nop.Core.IWebHelper webHelper
+
+<script src="~/js/public.menu.js" asp-location="Footer"></script>
+<script asp-location="Footer">
+    mainMenu.init('.menu-container .menu__toggle, .menu-container .menu__item-toggle', 'menu-dropdown--active');
+</script>
+
+
+<div class="main-menu d-none d-md-block">
+    <div class="row">
+        <div class="col-md-3 col-sm-12">           
+            <nav class="navbar navbar-expand-lg p-0" role="menu">
+                <ul class="m-auto text-uppercase" role="menuitem" aria-labelledby="menu-@Model.Id">
+                    <li>
+                        @await Component.InvokeAsync(typeof(TaxTypeSelectorViewComponent))
+                    </li>
+                    @* <li>
+                        @await Component.InvokeAsync(typeof(CurrencySelectorViewComponent))
+                    </li> *@
+                    <li>
+                        @await Component.InvokeAsync(typeof(LanguageSelectorViewComponent))
+                    </li>
+                    <li>
+                        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderSelectors })
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnBefore })
+        <div class="col-md-8 col-sm-12 text-center">
+            <nav class="navbar navbar-expand-lg p-0" role="menu">
+                <ul class="m-auto text-uppercase" role="menuitem" aria-labelledby="menu-@Model.Id">
+                    @foreach (var menuItem in Model.Items)
+                    {
+                        @if (menuItem.ChildrenItems.Any())
+                        {
+                            <li class="dropdown">
+                                @switch (menuItem.Template)
+                                {
+                                    case MenuItemTemplate.Grid:
+                                        @await Html.PartialAsync("_MenuItem.Grid.cshtml", menuItem)
+                                        break;
+                                    default:
+                                        @await Html.PartialAsync("_MenuItem.List.cshtml", menuItem)
+                                        break;
+                                }
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                @await Html.PartialAsync("_MenuItem.cshtml", menuItem)
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+        </div>
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnAfter })
+
+        <div class="col-md-1">
+            @* @{
+                var returnUrl = Context.Request.Query.TryGetValue("returnUrl", out var url) && !StringValues.IsNullOrEmpty(url)
+                ? url.ToString()
+                : webHelper.GetRawUrl(Context.Request);
+            }
+
+            <ul class="m-0 text-uppercase text-right">
+                <li class="pr-0"> <a href="@Url.RouteUrl("Login", new { returnUrl })"> @T("Account.Login") </a> </li>
+            </ul> *@
+        </div>
+    </div>
+</div>

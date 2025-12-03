@@ -2,13 +2,13 @@
 
 <div class="menu__item @(Model.ChildrenItems.Any() ? "menu-dropdown" : "") @Model.CssClass" data-item-id="@Model.Id" role="menuitem">
     <div class="menu__item-toggle" aria-haspopup="menu">
-        @await Html.PartialAsync("_MenuItem.cshtml", Model)
+        @* @await Html.PartialAsync("_MenuItem.cshtml", Model) *@
     </div>
     <div class="menu__grid-view" role="menu" aria-label="@Model.Title">
         @foreach (var item in Model.ChildrenItems)
         {
             <div class="menu__group" role="menuitem">
-                <a href="@item.Url" class="menu__image-link @(string.IsNullOrEmpty(item.Url) ? "menu__link--inactive" : "" )">
+                <a href="@item.Url" class="menu__image-link @(string.IsNullOrEmpty(item.Url) ? "menu__link--inactive" : "")">
                     @if (item.Picture is not null)
                     {
                         <img src="@item.Picture.ImageUrl" alt="@item.Picture.AlternateText" title="@item.Picture.Title" class="menu__image">
