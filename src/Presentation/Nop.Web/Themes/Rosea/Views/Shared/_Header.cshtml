@@ -18,19 +18,17 @@
         </div>
 
 
-        <div class="main-menu d-non d-md-block">
+        <div class="main-menu">
+            <div class="row m-0 no-gutters">
+                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderMiddle })
+
+                @await Component.InvokeAsync(typeof(TaxTypeSelectorViewComponent))
+                @await Component.InvokeAsync(typeof(CurrencySelectorViewComponent))
+                @await Component.InvokeAsync(typeof(LanguageSelectorViewComponent))
+                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderSelectors })
+            </div>
+
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderAfter })
         </div>
     </div>
-
-
-    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderMiddle })
-    @* <div class="header-upper">
-        <div class="header-selectors-wrapper">
-            @await Component.InvokeAsync(typeof(TaxTypeSelectorViewComponent))
-            @await Component.InvokeAsync(typeof(CurrencySelectorViewComponent))
-            @await Component.InvokeAsync(typeof(LanguageSelectorViewComponent))
-            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderSelectors })
-        </div>
-    </div> *@
-    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderAfter })
 </header>
