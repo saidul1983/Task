@@ -68,14 +68,11 @@
                                             }
                                             else
                                             {
-                                                <div class="new-wrapper register-block">
-                                                    <div class="text">
-                                                        @T("Account.Login.NewCustomerText")
-                                                    </div>
-                                                    <div class="buttons">
-                                                        <button type="button" class="register-button w-50" onclick="location.href='@registerUrl'">@T("Account.Register")</button>
-                                                    </div>
-                                                </div>
+                                                @T("Account.Login.NewCustomerText")
+
+                                                <p class="mt-5">
+                                                    <button type="button" class="register-button w-50" onclick="location.href='@registerUrl'">@T("Account.Register")</button>
+                                                </p>
                                             }
                                         </div>
                                     </div>
@@ -124,11 +121,8 @@
                                             <label for="checkbox-box-2" class="green-color">
                                                 <i class="fas fa-check" aria-hidden="true"></i>
                                             </label>
-                                            <label asp-for="RememberMe"></label> 
-                                            
-                                            <span class="forgot-password">
-                                                <a class="pl-2" asp-route="PasswordRecovery">@T("Account.Login.ForgotPassword")</a>
-                                            </span>
+                                            <label asp-for="RememberMe"></label>  <a class="pl-2" asp-route="PasswordRecovery">@T("Account.Login.ForgotPassword")</a>
+                                            <p class="mt-4">
                                         </div>
 
                                         @if (Model.DisplayCaptcha)
@@ -137,24 +131,26 @@
                                         }
                                     </div>
                                     <div class="buttons">
-                                        <button type="submit" class="register-button w-50">@T("Account.Login.LoginButton")</button>
+                                        <button type="submit" class="register-button w-50">Forgot Password @T("Account.Login.LoginButton")</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <div class=" make-your-password  mb-4">
+                            @await Component.InvokeAsync(typeof(TopicBlockViewComponent), new { systemName = "LoginRegistrationInfo" })
+                        </div>
+
                     </form>
 
-                    <div class=" make-your-password  mb-4">
-                        @await Component.InvokeAsync(typeof(TopicBlockViewComponent), new { systemName = "LoginRegistrationInfo" })
-                    </div>
+
                 </div>
             </div>
 
             <div class="external-authentication">
                 @await Component.InvokeAsync(typeof(ExternalMethodsViewComponent), "ExternalAuthentication")
             </div>
-            
+
             @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LoginBottom, additionalData = Model })
         </div>
     </div>
