@@ -1,6 +1,9 @@
 /* Scss Document */
 /*all color initialize*/
 /* Scss Document */
+
+@import url("styles.css");
+
 * {
   margin: 0;
   /*  padding: 0;*/

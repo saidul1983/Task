@@ -1,35 +1,31 @@
-﻿﻿@{
-Layout = "_Root.Head";
+﻿@{
+    Layout = "_Root.Head";
 }
 @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter })
-@await Html.PartialAsync("_Notifications")
-@await Html.PartialAsync("_JavaScriptDisabledWarning")
-<div class="main-container">
+@{
+    await Html.RenderPartialAsync("_Notifications");
+}
+@{
+    await Html.RenderPartialAsync("_JavaScriptDisabledWarning");
+}
+<div class="master-wrapper-page">
     @await Component.InvokeAsync(typeof(AdminHeaderLinksViewComponent))
-    @await Html.PartialAsync("_Header")
-    <script asp-location="Footer">
-        var localized_data = {
-            AjaxCartFailure: "@T("AjaxCart.Failure")"
-        };
-        AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart', localized_data);
-    </script>
+    @{
+        await Html.RenderPartialAsync("_Header");
+    }
 
-    <div class="slider-container"></div>
-    <div class="featured-products-container">
-        @* for product details page *@
+    <main class="master-wrapper-content" id="main">
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentBefore })
-
 
         @if (IsSectionDefined("Breadcrumb"))
         {
             @RenderSection("Breadcrumb")
         }
-
-        @RenderBody()
-
+        <div class="master-column-wrapper">
+            @RenderBody()
+        </div>
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ContentAfter })
-
-    </div>
+    </main>
     @await Component.InvokeAsync(typeof(FooterViewComponent))
 </div>
 @await Component.InvokeAsync(typeof(EuCookieLawViewComponent))
