@@ -9295,15 +9295,23 @@ a.skip:hover {
 }
 
 
+
+
 .menu,
 .header-menu,
 .header-links {
   overflow: visible !important;
 }
 
-  .header-links .dropdown:hover > .dropdown-menu {
-    display: block;
-  }
+.header-links .dropdown {
+  position: inline-block;
+}
+
+.header-links .dropdown:hover > .dropdown-menu {
+  display: block;
+  padding: 0px;
+  margin: 0px;
+}
 
 
 
