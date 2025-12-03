@@ -14,7 +14,7 @@
         <ul>
             <li><a href="#"> Home </a> </li>
             <li> <i class="fas fa-caret-right"></i> </li>
-            <li> <a class="active" href="#"> Register </a> </li>
+            <li> <a class="active" href="#"> @T("Account.Register") </a> </li>
         </ul>
     </div>
 
@@ -388,32 +388,23 @@
                                 </div>
                             </div>
                         }
-                        @if (Model.NewsletterEnabled || Model.CustomerAttributes.Count > 0)
+
+
+
+                        @if (Model.CustomerAttributes.Count > 0)
                         {
-                            <div class="fieldset">
-                                <div class="title">
-                                    <strong>@T("Account.Options")</strong>
-                                </div>
-                                <div class="form-fields">
-                                    @if (Model.NewsletterEnabled)
-                                    {
-                                        <div class="row form-group inputs">
-                                            <div class="col-md-2">
-                                                <label asp-for="NewsLetterSubscriptions" asp-postfix=":"></label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input asp-for="NewsLetterSubscriptions" />
-                                            </div>
-                                            <span asp-validation-for="NewsLetterSubscriptions"></span>
-                                        </div>
-                                    }
-                                    @if (Model.CustomerAttributes.Count > 0)
-                                    {
-                                        @await Html.PartialAsync("_CustomerAttributes", Model.CustomerAttributes)
-                                    }
+                            <div class="company-details mb-4">
+                                <h5 class="mb-4 border-bottom pb-2">
+                                    @T("Account.Options")
+                                </h5>
+                                <div class="row">
+                                    @await Html.PartialAsync("_CustomerAttributes", Model.CustomerAttributes)
                                 </div>
                             </div>
                         }
+
+                        
+
                         @if (Model.AllowCustomersToSetTimeZone)
                         {
                             <div class="fieldset">
