@@ -8370,10 +8370,6 @@ label, label + * {
   }
 
 
-  .menu > .menu__item:not(:last-child) {
-    border-right: 1px solid #ddd;
-  }
-
   .menu__item {
     display: inline-block;
     width: fit-content;
@@ -9313,6 +9309,22 @@ a.skip:hover {
   margin: 0px;
 }
 
+.menu-container a{
+    font-size: 12px;
+}
 
+.menu a {
+  text-transform: uppercase;
+  background-color: #323237;
+  color: #bebec6 !important;
+}
 
+  .menu a:hover {
+    color: #ff5874 !important;
+    text-decoration: none !important;
+  }
+
+.custom-background {
+  background-color: #323237;
+}
 

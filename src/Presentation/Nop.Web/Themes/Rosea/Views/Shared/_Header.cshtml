@@ -19,14 +19,20 @@
 
 
         <div class="main-menu">
-            <div class="row m-0 no-gutters">
-                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderMiddle })
-
-                @await Component.InvokeAsync(typeof(TaxTypeSelectorViewComponent))
-                @await Component.InvokeAsync(typeof(CurrencySelectorViewComponent))
-                @await Component.InvokeAsync(typeof(LanguageSelectorViewComponent))
+            <div class="row m-0 no-gutters align-items-center">
+                <div class="col-md-3 d-flex align-items-center">
+                    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderMiddle })
+                    @await Component.InvokeAsync(typeof(TaxTypeSelectorViewComponent))
+                    @await Component.InvokeAsync(typeof(CurrencySelectorViewComponent))
+                    @await Component.InvokeAsync(typeof(LanguageSelectorViewComponent))
+                </div>
                 @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderSelectors })
+
+                <div class="col-md-9 col-sm-12 text-center">
+                    @await Component.InvokeAsync(typeof(MainMenuViewComponent))
+                </div>
             </div>
+
 
             @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderAfter })
         </div>
