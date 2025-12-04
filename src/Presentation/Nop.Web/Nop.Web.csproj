@@ -29,14 +29,74 @@
     <!-- We copy the entire \App_Data directory. But we ignore JSON files and data protection keys  -->
     <Content Include="App_Data\**" CopyToPublishDirectory="PreserveNewest" Exclude="App_Data\*.json" />
     <Content Remove="App_Data\*.json" />
+    <Content Remove="Themes\Rosea\Views\Blog\**" />
+    <Content Remove="Themes\Rosea\Views\Boards\**" />
+    <Content Remove="Themes\Rosea\Views\Checkout\**" />
+    <Content Remove="Themes\Rosea\Views\Common\**" />
+    <Content Remove="Themes\Rosea\Views\News\**" />
+    <Content Remove="Themes\Rosea\Views\Order\**" />
+    <Content Remove="Themes\Rosea\Views\ReturnRequest\**" />
+    <Content Remove="Themes\Rosea\Views\Shared\Components\CheckoutProgress\**" />
+    <Content Remove="Themes\Rosea\Views\Shared\Components\HomepagePolls\**" />
+    <Content Remove="Themes\Rosea\Views\Shared\Components\OrderSummary\**" />
+    <Content Remove="Themes\Rosea\Views\Shared\Components\ProductsAlsoPurchased\**" />
+    <Content Remove="Themes\Rosea\Views\Shared\Components\RelatedProducts\**" />
     <Content Remove="App_Data\Installation\SampleData.json" />
     <None Include="App_Data\Installation\SampleData.json" CopyToPublishDirectory="PreserveNewest" />
     <Content Update="App_Data\DataProtectionKeys\*.xml" CopyToPublishDirectory="Never" />
 
     <Compile Remove="Plugins\**;Themes\**" />
+
+    <Compile Remove="Themes\Rosea\Views\Blog\**" />
+
+    <Compile Remove="Themes\Rosea\Views\Boards\**" />
+
+    <Compile Remove="Themes\Rosea\Views\Checkout\**" />
+
+    <Compile Remove="Themes\Rosea\Views\Common\**" />
+
+    <Compile Remove="Themes\Rosea\Views\News\**" />
+
+    <Compile Remove="Themes\Rosea\Views\Order\**" />
+
+    <Compile Remove="Themes\Rosea\Views\ReturnRequest\**" />
+
+    <Compile Remove="Themes\Rosea\Views\Shared\Components\CheckoutProgress\**" />
+
+    <Compile Remove="Themes\Rosea\Views\Shared\Components\HomepagePolls\**" />
+
+    <Compile Remove="Themes\Rosea\Views\Shared\Components\OrderSummary\**" />
+
+    <Compile Remove="Themes\Rosea\Views\Shared\Components\ProductsAlsoPurchased\**" />
+
+    <Compile Remove="Themes\Rosea\Views\Shared\Components\RelatedProducts\**" />
     <Content Remove="Plugins\**;Themes\**" />
     <EmbeddedResource Remove="Plugins\**;Themes\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\Blog\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\Boards\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\Checkout\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\Common\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\News\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\Order\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\ReturnRequest\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\Shared\Components\CheckoutProgress\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\Shared\Components\HomepagePolls\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\Shared\Components\OrderSummary\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\Shared\Components\ProductsAlsoPurchased\**" />
+    <EmbeddedResource Remove="Themes\Rosea\Views\Shared\Components\RelatedProducts\**" />
     <None Remove="Plugins\**;Themes\**" />
+    <None Remove="Themes\Rosea\Views\Blog\**" />
+    <None Remove="Themes\Rosea\Views\Boards\**" />
+    <None Remove="Themes\Rosea\Views\Checkout\**" />
+    <None Remove="Themes\Rosea\Views\Common\**" />
+    <None Remove="Themes\Rosea\Views\News\**" />
+    <None Remove="Themes\Rosea\Views\Order\**" />
+    <None Remove="Themes\Rosea\Views\ReturnRequest\**" />
+    <None Remove="Themes\Rosea\Views\Shared\Components\CheckoutProgress\**" />
+    <None Remove="Themes\Rosea\Views\Shared\Components\HomepagePolls\**" />
+    <None Remove="Themes\Rosea\Views\Shared\Components\OrderSummary\**" />
+    <None Remove="Themes\Rosea\Views\Shared\Components\ProductsAlsoPurchased\**" />
+    <None Remove="Themes\Rosea\Views\Shared\Components\RelatedProducts\**" />
     <None Include="Plugins\**" CopyToPublishDirectory="PreserveNewest" Exclude="Plugins\**\runtimes\**;Plugins\**\ref\**;Plugins\**\*.pdb" />
 
     <Content Include="Themes\**" CopyToPublishDirectory="PreserveNewest" CopyToOutputDirectory="Never" />
@@ -64,20 +124,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Themes\Rosea\Views\ReturnRequest\" />
-    <Folder Include="Themes\Rosea\Views\Order\" />
-    <Folder Include="Themes\Rosea\Views\News\" />
-    <Folder Include="Themes\Rosea\Views\Common\" />
-    <Folder Include="Themes\Rosea\Views\Checkout\" />
-    <Folder Include="Themes\Rosea\Views\Boards\" />
-    <Folder Include="Themes\Rosea\Views\Blog\" />
-    <Folder Include="Themes\Rosea\Views\Shared\Components\RelatedProducts\" />
-    <Folder Include="Themes\Rosea\Views\Shared\Components\ProductsAlsoPurchased\" />
-    <Folder Include="Themes\Rosea\Views\Shared\Components\OrderSummary\" />
-    <Folder Include="Themes\Rosea\Views\Shared\Components\HomepagePolls\" />
     <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageNews\" />
     <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageBestSellers\" />
-    <Folder Include="Themes\Rosea\Views\Shared\Components\CheckoutProgress\" />
   </ItemGroup>
 
   <ItemGroup>
