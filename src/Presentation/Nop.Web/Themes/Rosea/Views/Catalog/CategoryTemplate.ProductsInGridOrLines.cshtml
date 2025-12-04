@@ -33,7 +33,8 @@
 {
     @if (Model.DisplayCategoryBreadcrumb)
     {
-        <div class="breadcrumb">
+        <div class="inner-page-bread-crumb">
+            <h3 class="text-uppercase"> <strong>@Model.Name</strong> </h3>
             <ul>
                 <li>
                     <a href="@Url.RouteUrl(NopRouteNames.General.HOMEPAGE)" title="@T("Categories.Breadcrumb.Top")">@T("Categories.Breadcrumb.Top")</a>
