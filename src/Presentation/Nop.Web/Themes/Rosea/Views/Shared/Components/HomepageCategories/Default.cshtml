@@ -4,26 +4,19 @@
 
 @if (Model.Count > 0)
 {
-    <div class="products-slider">
-        <div class="owl-carousel owl-theme owl-loaded owl-drag" id="top-sales">
-
-            <div class="item">
-                @foreach (var item in Model)
-                {
-                    <article class="products-box">
-                        <h2 class="title">
-                            <a href="@(await NopUrl.RouteGenericUrlAsync<Category>(new { SeName = item.SeName }))" title="@item.PictureModel.Title">
-                                @item.Name
-                            </a>
-                        </h2>
-                        <div class="picture">
-                            <a href="@(await NopUrl.RouteGenericUrlAsync<Category>(new { SeName = item.SeName }))" title="@item.PictureModel.Title">
-                                <img alt="@item.PictureModel.AlternateText" src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
-                            </a>
-                        </div>
-                    </article>
-                }
-            </div>
+    <div class="category-slider">
+        <div class="owl-carousel owl-theme" id="category-slider">
+            @foreach (var item in Model)
+            {
+                <div class="item">
+                    <div class="categories-main-box">
+                        <a href="@(await NopUrl.RouteGenericUrlAsync<Category>(new { SeName = item.SeName }))">
+                            <h5 href="@(await NopUrl.RouteGenericUrlAsync<Category>(new { SeName = item.SeName }))" title="@item.PictureModel.Title"> @item.Name <i class="fas fa-angle-right"></i> </h5>
+                            <img class="img-fluid" src="@item.PictureModel.ImageUrl" alt="@item.PictureModel.AlternateText">
+                        </a>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 }
