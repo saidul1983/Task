@@ -135,6 +135,9 @@
     <Content Update="Themes\Rosea\Views\Shared\Components\HomepageCategories\Default.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
+    <Content Update="Themes\Rosea\Views\Shared\Components\HomepageNews\Default.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Themes\Rosea\Views\Shared\Components\HomepageProducts\CustomDefault.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>

@@ -1,0 +1,96 @@
+﻿@model HomepageNewsItemsModel
+
+@using Nop.Core.Domain.News
+
+@inject IThemeContext themeContext
+@{
+    var themeName = await themeContext.GetWorkingThemeNameAsync();
+    NopHtml.AppendScriptParts(ResourceLocation.Footer, $"/Themes/{themeName}/Content/js/jquery-3.3.1.min.js");
+}
+
+<link rel="stylesheet" href="~/css/owl.carousel.min.css" />
+<link rel="stylesheet" href="~/css/owl.theme.default.min.css" />
+
+<!-- Load jQuery FIRST -->
+<script src="~/Themes/@themeName/Content/js/jquery-3.3.1.min.js" asp-location="Footer"></script>
+<script src="~/Themes/@themeName/Content/js/jquery-migrate-1.4.1.min.js" asp-location="Footer"></script>
+
+<!-- Owl Carousel -->
+<script src="~/Themes/@themeName/Content/js/owl.carousel.min.js" asp-location="Footer"></script>
+
+<!-- Custom JS -->
+<script src="~/Themes/@themeName/Content/js/custom-jquery.js" asp-location="Footer"></script>
+
+<!-- Initialize Owl Carousel -->
+<script asp-location="Footer">
+    $(function () {
+
+        console.log("Checking jQuery:", typeof $);
+
+        if (!$) {
+            console.error("jQuery not loaded!");
+            return;
+        }
+
+        console.log("Initializing Owl Carousel…");
+
+        $("#letest-news").owlCarousel({
+            loop: true,
+            margin: 10,
+            dots: true,
+            nav: true,
+            items: 1,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+            navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>']
+        });
+
+        console.log("Owl Carousel initialized successfully.");
+    });
+</script>
+
+
+<div class="letest-news-container">
+    <h2 class="text-uppercase mb-3"> letest news </h2>
+
+    <div class="owl-carousel owl-theme owl-loaded owl-drag" id="letest-news">
+        @foreach (var item in Model.NewsItems)
+        {
+            <div class="item">
+
+                <div class="news-content-box">
+                    <div class="news-titel">
+                        <i class="far fa-newspaper float-left"></i>
+                        <span class="d-block news-date"> <time datetime="@item.CreatedOn.ToString("yyyy-MM-dd")">@item.CreatedOn.ToString("D")</time> </span>
+                        <a href="@(await NopUrl.RouteGenericUrlAsync<NewsItem>(new { SeName = item.SeName }))"> <strong> @item.Title </strong> </a>
+                    </div>
+                    <p class="pt-3 news-body">
+                        @Html.Raw(item.Short)
+                    </p>
+
+                    <p class="read-more-text"> <a href="@Url.RouteUrl(NopRouteNames.General.NEWS)"> <strong>@T("News.MoreInfo")</strong> </a> </p>
+                </div>
+
+            </div>
+        }
+        <div class="item">
+
+            <div class="news-content-box">
+                <div class="news-titel">
+                    <i class="far fa-newspaper float-left"></i>
+                    <span class="d-block news-date"> -Thursday, July 26, 2018 </span>
+                    <a href="#"> <strong> nopCommerce new release! </strong> </a>
+                </div>
+                <p class="pt-3 news-body">
+                    Lorem ipsum dolor sit amet, eum an aperiam facilisi lobortis,
+                    eam dicant melius ornatus te, his oportere Lorem ipsum dolor eum an aperiam facilisi
+                    lobortis
+                </p>
+
+                <p class="read-more-text"> <a href="#"> <strong>Read More</strong> </a> </p>
+            </div>
+        </div>
+    </div>
+
+</div>
