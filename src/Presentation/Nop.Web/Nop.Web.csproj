@@ -125,7 +125,6 @@
 
   <ItemGroup>
     <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageNews\" />
-    <Folder Include="Themes\Rosea\Views\Shared\Components\HomepageBestSellers\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -178,6 +177,9 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Themes\Rosea\Views\Product\_ProductReviewOverview.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\Rosea\Views\Shared\Components\HomepageBestSellers\Default.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Themes\Rosea\Views\Shared\Components\HomepageCategories\Default.cshtml">
