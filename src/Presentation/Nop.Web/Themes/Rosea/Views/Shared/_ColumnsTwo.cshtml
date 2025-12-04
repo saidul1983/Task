@@ -29,43 +29,44 @@
     }
 }
 
-
-<div class="products-list-container">
-    <div class="inner-page-bread-crumb">
-        @await RenderSectionAsync("Breadcrumb", false)
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="left-side-bar">
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        @if (IsSectionDefined("left"))
-                        {
-                            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnBefore })
-                            @await RenderSectionAsync("left")
-                            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfter })
-                        }
-                        else
-                        {
-                            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnBefore })
-                            @await RenderSectionAsync("CatalogFilters", false)
-                            ;
-                            @await Component.InvokeAsync(typeof(CategoryNavigationViewComponent), new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
-                            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfterCategoryNavigation })
-                            @await Component.InvokeAsync(typeof(ManufacturerNavigationViewComponent), new { currentManufacturerId = currentManufacturerId })
-                            @await Component.InvokeAsync(typeof(VendorNavigationViewComponent))
-                            @await Component.InvokeAsync(typeof(RecentlyViewedProductsBlockViewComponent), new { productThumbPictureSize = 64 })
-                            @await Component.InvokeAsync(typeof(PopularProductTagsViewComponent))
-                            @await Component.InvokeAsync(typeof(PollBlockViewComponent), new { systemKeyword = "LeftColumnPoll" })
-                            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfter })
-                        }
+<div class="page-bg-container">
+    <div class="products-list-container">
+        <div class="inner-page-bread-crumb">
+            @await RenderSectionAsync("Breadcrumb", false)
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="left-side-bar">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            @if (IsSectionDefined("left"))
+                            {
+                                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnBefore })
+                                @await RenderSectionAsync("left")
+                                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfter })
+                            }
+                            else
+                            {
+                                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnBefore })
+                                @await RenderSectionAsync("CatalogFilters", false)
+                                ;
+                                @await Component.InvokeAsync(typeof(CategoryNavigationViewComponent), new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
+                                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfterCategoryNavigation })
+                                @await Component.InvokeAsync(typeof(ManufacturerNavigationViewComponent), new { currentManufacturerId = currentManufacturerId })
+                                @await Component.InvokeAsync(typeof(VendorNavigationViewComponent))
+                                @await Component.InvokeAsync(typeof(RecentlyViewedProductsBlockViewComponent), new { productThumbPictureSize = 64 })
+                                @await Component.InvokeAsync(typeof(PopularProductTagsViewComponent))
+                                @await Component.InvokeAsync(typeof(PollBlockViewComponent), new { systemKeyword = "LeftColumnPoll" })
+                                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.LeftSideColumnAfter })
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-9">
-                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnBefore })
-                @RenderBody()
-                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnAfter })
+                <div class="col-md-9">
+                    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnBefore })
+                    @RenderBody()
+                    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.MainColumnAfter })
+                </div>
             </div>
         </div>
     </div>

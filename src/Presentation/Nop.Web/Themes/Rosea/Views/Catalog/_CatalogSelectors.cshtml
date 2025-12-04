@@ -7,99 +7,105 @@
 {
     return;
 }
-<div class="col-md-6">
-    <div class="mb-3 selectors-contents">
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="mb-3 selectors-contents">
 
 
-        @if (Model.AllowProductSorting)
-        {
-            @Html.DropDownList("products-orderby", Model.AvailableSortOptions, new { @class = "", aria_label = T("Catalog.OrderBy.Label") })
+            @if (Model.AllowProductSorting)
+            {
+                @Html.DropDownList("products-orderby", Model.AvailableSortOptions, new { @class = "", aria_label = T("Catalog.OrderBy.Label") })
 
-            <script asp-location="Footer">
-                $(function() {
-                    var $orderByEl = $('#products-orderby');
-                    $orderByEl.on('change', function () {
-                        CatalogProducts.getProducts();
+                <script asp-location="Footer">
+                    $(function() {
+                        var $orderByEl = $('#products-orderby');
+                        $orderByEl.on('change', function () {
+                            CatalogProducts.getProducts();
+                        });
+
+                        $(CatalogProducts).on('before', function (e) {
+                            e.payload.urlBuilder
+                                .addParameter('orderby', $orderByEl.val());
+                        });
                     });
+                </script>
+            }
 
-                    $(CatalogProducts).on('before', function (e) {
-                        e.payload.urlBuilder
-                            .addParameter('orderby', $orderByEl.val());
+            @if (Model.AllowCustomersToSelectPageSize)
+            {
+                @Html.DropDownList("products-pagesize", Model.PageSizeOptions, new { @class = "w-25", aria_label = T("Catalog.PageSize.Label") })
+
+                <script asp-location="Footer">
+                    $(function() {
+                        var $pageSizeEl = $('#products-pagesize');
+                        $pageSizeEl.on('change', function () {
+                            CatalogProducts.getProducts();
+                        });
+
+                        $(CatalogProducts).on('before', function (e) {
+                            e.payload.urlBuilder
+                                .addParameter('pagesize', $pageSizeEl.val());
+                        });
                     });
-                });
-            </script>
-        }
-
-        @if (Model.AllowCustomersToSelectPageSize)
-        {
-            @Html.DropDownList("products-pagesize", Model.PageSizeOptions, new { @class = "w-25", aria_label = T("Catalog.PageSize.Label") })
-
-            <script asp-location="Footer">
-                $(function() {
-                    var $pageSizeEl = $('#products-pagesize');
-                    $pageSizeEl.on('change', function () {
-                        CatalogProducts.getProducts();
-                    });
-
-                    $(CatalogProducts).on('before', function (e) {
-                        e.payload.urlBuilder
-                            .addParameter('pagesize', $pageSizeEl.val());
-                    });
-                });
-            </script>
-        }
-    </div>
-</div>
-<div class="col-md-6">
-
-    @if (Model.AllowProductViewModeChanging)
-    {
-        <div class="row no-gutters">
-            <div class="products-view-icon float-right">
-                <span>@T("Catalog.ViewMode")</span>
-                @if (Model.AvailableViewModes.Count > 1)
-                {
-                    var gridMode = Model.AvailableViewModes[0];
-                    var listMode = Model.AvailableViewModes[1];
-
-                    <a class="viewmode-icon grid
-                        @if (gridMode.Selected){
-                            <text>active</text>
-                        }" 
-                        data-viewmode="@gridMode.Value" title="@gridMode.Text" tabindex="0" role="button" href="#">
-                        <span class="icon-products-view-1"></span>
-                    </a>
-
-                    <a class="viewmode-icon list 
-                        @if (listMode.Selected)
-                        {
-                            <text>active</text>
-                        }" 
-                        data-viewmode="@listMode.Value" title="@listMode.Text" tabindex="0" role="button" href="#">
-                        <span class="icon-products-view-2"></span> 
-                    </a>
-                }
+                </script>
+            }
         </div>
     </div>
-    <script asp-location="Footer">
-        $(function() {
-            var $viewModeEls = $('[data-viewmode]');
-            $viewModeEls.on('click', function () {
-                if (!$(this).hasClass('active')) {
-                        $viewModeEls.toggleClass('active');
-                    CatalogProducts.getProducts();
-                }
-                return false;
-            });
+    <div class="col-md-6 d-flex justify-content-end">
 
-            $(CatalogProducts).on('before', function (e) {
-                    var $viewModeEl = $('[data-viewmode].active');
-                if ($viewModeEl) {
-                    e.payload.urlBuilder
-                        .addParameter('viewmode', $viewModeEl.data('viewmode'));
-                }
-            });
-        });
-    </script>
+        @if (Model.AllowProductViewModeChanging)
+        {
+            <div class="row no-gutters">
+                <div class="products-view-icon float-right">
+                    <span>@T("Catalog.ViewMode")</span>
+                    @if (Model.AvailableViewModes.Count > 1)
+                    {
+                        var gridMode = Model.AvailableViewModes[0];
+                        var listMode = Model.AvailableViewModes[1];
+
+                        <a class="viewmode-icon grid
+                           @if (gridMode.Selected)
+                           {
+                                                    <text>active</text>
+                                        }
+                "
+                                        data-viewmode="@gridMode.Value" title="@gridMode.Text" tabindex="0" role="button" href="#">
+                                        <span class="icon-products-view-1"></span>
+                                    </a>
+
+                        <a class="viewmode-icon list
+                           @if (listMode.Selected)
+                           {
+                                                    <text>active</text>
+                                        }
+                "
+                                        data-viewmode="@listMode.Value" title="@listMode.Text" tabindex="0" role="button" href="#">
+                                        <span class="icon-products-view-2"></span>
+                                    </a>
+                    }
+                </div>
+            </div>
+            <script asp-location="Footer">
+                $(function() {
+                    var $viewModeEls = $('[data-viewmode]');
+                    $viewModeEls.on('click', function () {
+                        if (!$(this).hasClass('active')) {
+                                $viewModeEls.toggleClass('active');
+                            CatalogProducts.getProducts();
+                        }
+                        return false;
+                    });
+
+                    $(CatalogProducts).on('before', function (e) {
+                            var $viewModeEl = $('[data-viewmode].active');
+                        if ($viewModeEl) {
+                            e.payload.urlBuilder
+                                .addParameter('viewmode', $viewModeEl.data('viewmode'));
+                        }
+                    });
+                });
+            </script>
         }
+    </div>
 </div>
